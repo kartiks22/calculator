@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                build 'Rundeck_deploy'
+                build 'rundeck_deploy'
             }
         }
     }
