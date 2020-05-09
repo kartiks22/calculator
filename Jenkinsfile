@@ -13,10 +13,10 @@ pipeline {
                 sh 'pytest'
             }
         }
-        // stage('Deploy') {
-        //     steps {
-        //         build 'Rundeck_deploy'
-        //     }
-        // }
+        stage('Deploy') {
+            steps {
+                build 'Rundeck_deploy'
+            }
+        }
     }
 }
