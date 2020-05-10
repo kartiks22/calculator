@@ -1,4 +1,45 @@
 pipeline {
+    environment {
+        registry = "kartiks22/calculator"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+    }
+    agent any
+    stages {
+        stage('Build') {
+            steps{
+                script {
+                    dockerImage = docker.build registry + ":latest"
+                }
+            }
+        }
+        stage('test'){
+            steps {
+                sh 'pip3 install pytest'
+                sh 'pytest'
+            }
+        }
+        stage('Archive'){
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                build 'rundeck_deploy'
+            }
+        }
+    }
+}
+
+/*pipeline {
+    environment {
+        dockerImage = ''
+    }
     agent any
     stages {
         stage('Build') {
@@ -15,14 +56,17 @@ pipeline {
         }
         stage('Archive'){
             steps{
-                docker.withRegistry( '', registryCredential ) {
-                dockerImage.push()
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                    }
+                }
             }
-        }
+        }       
         stage('Deploy') {
             steps {
                 build 'rundeck_deploy'
             }
         }
     }
-}
+}*/
