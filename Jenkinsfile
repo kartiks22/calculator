@@ -13,6 +13,12 @@ pipeline {
                 sh 'pytest'
             }
         }
+        stage('Archive'){
+            steps{
+                docker.withRegistry( '', registryCredential ) {
+                dockerImage.push()
+            }
+        }
         stage('Deploy') {
             steps {
                 build 'rundeck_deploy'
