@@ -1,7 +1,7 @@
 from calc import *
 
 def test_add():
-    assert add(8,2) == 4
+    assert add(8,2) == 10
 
 def test_subtract():
     assert subtract(6,5) == 1
