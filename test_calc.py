@@ -1,13 +1,13 @@
 from calc import *
 
-def test_sum():
-    assert sum(1,3) == 4
+def test_add():
+    assert add(8,2) == 4
 
-def test_diff():
-    assert diff(4,2) == 2
+def test_subtract():
+    assert subtract(6,5) == 1
 
 def test_multiply():
-    assert multiply(2,3) == 6
+    assert multiply(7,7) == 49
 
 def test_divide():
-    assert divide(4,2) == 2
+    assert divide(12,3) == 4
